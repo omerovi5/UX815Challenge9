@@ -4,247 +4,289 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dribble – Search: landing page</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="screen.css">
+
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          borderRadius: { xl2: '12px' }
+          fontFamily: { sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'] },
+          colors: {
+            'canvas-beige':    '#f2e8d9',
+            'canvas-black':    '#181818',
+            'canvas-offwhite': '#f4f4f4',
+            'canvas-orange':   '#f0a500',
+            'canvas-tan':      '#e5ddd0',
+            'icon-blue':       '#6a7bbd',
+            'icon-gray':       '#8a8a9a',
+            'icon-purple':     '#4f46e5',
+            'icon-dark':       '#b0b8c8',
+            'badge-team-bg':   '#e8eeff',
+            'badge-team-txt':  '#3d5af1',
+            'badge-pro-bg':    '#fff4d6',
+            'badge-pro-txt':   '#b07800',
+            'illus-green':     '#3ecf8e',
+          },
         }
       }
     }
   </script>
+
+  <style>
+    /* ── Hover: scale thumb-inner on shot-thumb hover ── */
+    .shot-thumb:hover .thumb-inner          { transform: scale(1.02); }
+
+    /* ── Hover: darken overlay ── */
+    .shot-thumb:hover .shot-overlay         { background: rgba(0,0,0,0.10); }
+
+    /* ── Hover: slide up overlay title ── */
+    .shot-thumb:hover .overlay-title        { opacity: 1; transform: translateY(0); }
+
+    /* ── Hover: show action buttons ── */
+    .shot-thumb:hover .overlay-actions      { opacity: 1; }
+
+    /* ── Hover: overlay button bg ── */
+    .overlay-btn:hover                      { background: #f0f0f0; }
+  </style>
 </head>
-<body class="bg-white text-gray-900">
 
-<div class="max-w-6xl mx-auto px-6 py-0">
+<body class="bg-white text-gray-900 font-sans">
 
-  <!-- ── Filter bar ── -->
+<div class="max-w-6xl mx-auto px-6">
+
+  <!-- ══════════════════════════════════
+       FILTER BAR
+  ══════════════════════════════════ -->
   <div class="flex items-center gap-2 py-5 border-b border-gray-200 mb-7 flex-wrap">
 
     <!-- Popular dropdown -->
     <button class="flex items-center gap-1.5 border border-gray-300 rounded-full px-4 py-1.5 text-sm font-medium text-gray-800 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-      Popular <i class="bi bi-chevron-down text-xs"></i>
+      Popular
+      <i data-lucide="chevron-down" class="w-3 h-3"></i>
     </button>
 
     <!-- Category tabs -->
     <nav class="flex items-center gap-0.5 flex-1 overflow-hidden">
-      <button class="filter-tab-active px-3 py-1.5 text-sm rounded-full hover:bg-gray-100 transition-colors whitespace-nowrap">Discover</button>
-      <button class="px-3 py-1.5 text-sm text-gray-500 font-medium rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Animation</button>
-      <button class="px-3 py-1.5 text-sm text-gray-500 font-medium rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Branding</button>
-      <button class="px-3 py-1.5 text-sm text-gray-500 font-medium rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Illustration</button>
-      <button class="px-3 py-1.5 text-sm text-gray-500 font-medium rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Mobile</button>
-      <button class="px-3 py-1.5 text-sm text-gray-500 font-medium rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Print</button>
-      <button class="px-3 py-1.5 text-sm text-gray-500 font-medium rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors">
-        <i class="bi bi-chevron-right text-xs"></i>
+      <!-- Active tab -->
+      <button class="px-3 py-1.5 text-sm font-bold underline underline-offset-[3px] text-gray-900 rounded-full hover:bg-gray-100 transition-colors whitespace-nowrap">
+        Discover
+      </button>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-500 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Animation</button>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-500 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Branding</button>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-500 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Illustration</button>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-500 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Mobile</button>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-500 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors whitespace-nowrap">Print</button>
+      <button class="px-3 py-1.5 text-sm font-medium text-gray-500 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors">
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
       </button>
     </nav>
 
     <!-- Filters button -->
     <button class="flex items-center gap-1.5 border border-gray-300 rounded-full px-4 py-1.5 text-sm font-medium text-gray-800 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap ml-auto">
-      <i class="bi bi-sliders text-sm"></i> Filters
+      <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+      Filters
     </button>
 
   </div>
 
-  <!-- ── Shot grid — 3 columns ── -->
+  <!-- ══════════════════════════════════
+       SHOT GRID — 3 columns
+  ══════════════════════════════════ -->
   <div class="grid grid-cols-3 gap-6">
 
-    <!-- ══ ROW 1 ══ -->
+    <!-- ────────────── ROW 1 ────────────── -->
 
     <!-- Card 1 · Siege Media — beige, blue sketch icons 3×3 -->
     <div>
-      <div class="shot-thumb">
-        <div class="thumb-inner canvas-beige">
-          <div class="icon-grid icon-grid-3x3 w-full h-full">
-            <!-- Row 1: presentation, scales, dice -->
-            <i class="bi bi-bar-chart-line icon-blue"></i>
-            <i class="bi bi-bank2 icon-blue"></i>
-            <i class="bi bi-dice-3 icon-blue"></i>
-            <!-- Row 2: money bag, hammer, globe hand -->
-            <i class="bi bi-bag icon-blue"></i>
-            <i class="bi bi-tools icon-blue"></i>
-            <i class="bi bi-globe2 icon-blue"></i>
-            <!-- Row 3: handshake, calendar, megaphone -->
-            <i class="bi bi-handshake icon-blue"></i>
-            <i class="bi bi-calendar3 icon-blue"></i>
-            <i class="bi bi-megaphone icon-blue"></i>
+      <!-- Thumbnail -->
+      <div class="shot-thumb rounded-xl overflow-hidden relative cursor-pointer">
+        <div class="thumb-inner rounded-xl transition-transform duration-300 ease-in-out w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-canvas-beige">
+          <!-- 3×3 icon grid -->
+          <div class="grid grid-cols-3 gap-[18px] p-7 w-full h-full place-items-center">
+            <i data-lucide="bar-chart-2"   class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="scale"         class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="dice-3"        class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="shopping-bag"  class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="wrench"        class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="globe"         class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="handshake"     class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="calendar"      class="w-7 h-7 text-icon-blue opacity-90"></i>
+            <i data-lucide="megaphone"     class="w-7 h-7 text-icon-blue opacity-90"></i>
           </div>
         </div>
-        <div class="shot-overlay"></div>
+        <!-- Overlay -->
+        <div class="shot-overlay absolute inset-0 rounded-xl bg-transparent transition-all duration-200 pointer-events-none flex items-end p-3"></div>
       </div>
-      <!-- Author -->
+      <!-- Author row -->
       <div class="flex items-center gap-2 mt-2.5">
-        <div class="author-avatar text-[9px]" style="background:#c0392b; letter-spacing:-0.5px;">sm</div>
+        <div class="w-7 h-7 rounded-full bg-[#c0392b] flex items-center justify-center text-[9px] font-extrabold text-white shrink-0 tracking-tighter">sm</div>
         <span class="text-sm font-medium text-gray-800 truncate">Siege Media</span>
-        <span class="badge-team">TEAM</span>
+        <span class="text-[10px] font-bold bg-badge-team-bg text-badge-team-txt rounded px-1.5 py-px">TEAM</span>
         <div class="flex items-center gap-3 ml-auto shrink-0">
-          <span class="stat"><i class="bi bi-heart"></i> 193</span>
-          <span class="stat"><i class="bi bi-eye"></i> 67.4k</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="heart" class="w-3 h-3"></i> 193</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="eye"   class="w-3 h-3"></i> 67.4k</span>
         </div>
       </div>
     </div>
 
-    <!-- Card 2 · Orman Clark — dark bg, dense white icon grid -->
+    <!-- Card 2 · Orman Clark — dark bg, dense icon grid 8 cols -->
     <div>
-      <div class="shot-thumb">
-        <div class="thumb-inner canvas-black">
-          <div class="icon-grid icon-grid-8col w-full h-full">
-            <i class="bi bi-type-h1 icon-dark"></i>
-            <i class="bi bi-type-h2 icon-dark"></i>
-            <i class="bi bi-fonts icon-dark"></i>
-            <i class="bi bi-type-bold icon-dark"></i>
-            <i class="bi bi-type-italic icon-dark"></i>
-            <i class="bi bi-type-underline icon-dark"></i>
-            <i class="bi bi-link45deg icon-dark"></i>
-            <i class="bi bi-image icon-dark"></i>
-
-            <i class="bi bi-list-ul icon-dark"></i>
-            <i class="bi bi-list-ol icon-dark"></i>
-            <i class="bi bi-code-slash icon-dark"></i>
-            <i class="bi bi-blockquote-left icon-dark"></i>
-            <i class="bi bi-table icon-dark"></i>
-            <i class="bi bi-grid-3x3 icon-dark"></i>
-            <i class="bi bi-layout-split icon-dark"></i>
-            <i class="bi bi-columns-gap icon-dark"></i>
-
-            <i class="bi bi-mic icon-dark"></i>
-            <i class="bi bi-camera-video icon-dark"></i>
-            <i class="bi bi-film icon-dark"></i>
-            <i class="bi bi-music-note icon-dark"></i>
-            <i class="bi bi-file-earmark-text icon-dark"></i>
-            <i class="bi bi-file-earmark-pdf icon-dark"></i>
-            <i class="bi bi-folder2 icon-dark"></i>
-            <i class="bi bi-archive icon-dark"></i>
-
-            <i class="bi bi-search icon-dark"></i>
-            <i class="bi bi-sliders icon-dark"></i>
-            <i class="bi bi-funnel icon-dark"></i>
-            <i class="bi bi-sort-down icon-dark"></i>
-            <i class="bi bi-bell icon-dark"></i>
-            <i class="bi bi-gear icon-dark"></i>
-            <i class="bi bi-lock icon-dark"></i>
-            <i class="bi bi-shield-check icon-dark"></i>
-
-            <i class="bi bi-person icon-dark"></i>
-            <i class="bi bi-people icon-dark"></i>
-            <i class="bi bi-envelope icon-dark"></i>
-            <i class="bi bi-chat-dots icon-dark"></i>
-            <i class="bi bi-calendar3 icon-dark"></i>
-            <i class="bi bi-clock icon-dark"></i>
-            <i class="bi bi-star icon-dark"></i>
-            <i class="bi bi-bookmark icon-dark"></i>
-
-            <i class="bi bi-tag icon-dark"></i>
-            <i class="bi bi-share icon-dark"></i>
-            <i class="bi bi-clipboard icon-dark"></i>
-            <i class="bi bi-pencil icon-dark"></i>
-            <i class="bi bi-trash icon-dark"></i>
-            <i class="bi bi-arrow-repeat icon-dark"></i>
-            <i class="bi bi-check2 icon-dark"></i>
-            <i class="bi bi-x-lg icon-dark"></i>
+      <div class="shot-thumb rounded-xl overflow-hidden relative cursor-pointer">
+        <div class="thumb-inner rounded-xl transition-transform duration-300 ease-in-out w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-canvas-black">
+          <div class="grid grid-cols-8 gap-2 p-[18px] w-full h-full place-items-center">
+            <!-- 48 icons, all text-icon-dark / w-4 h-4 -->
+            <i data-lucide="heading-1"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="heading-2"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="heading-3"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="bold"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="italic"          class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="underline"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="link"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="image"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="list"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="list-ordered"    class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="code"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="quote"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="table"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="grid-3x3"        class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="layout-panel-left" class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="columns-2"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="mic"             class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="video"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="film"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="music"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="file-text"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="file-type"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="folder"          class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="archive"         class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="search"          class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="filter"          class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="arrow-down-a-z"  class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="bell"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="settings"        class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="lock"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="shield-check"    class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="user"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="users"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="mail"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="message-circle"  class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="calendar"        class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="clock"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="star"            class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="bookmark"        class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="tag"             class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="share-2"         class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="clipboard"       class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="pencil"          class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="trash-2"         class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="refresh-cw"      class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="check"           class="w-4 h-4 text-icon-dark"></i>
+            <i data-lucide="x"               class="w-4 h-4 text-icon-dark"></i>
           </div>
         </div>
-        <div class="shot-overlay"></div>
+        <div class="shot-overlay absolute inset-0 rounded-xl bg-transparent transition-all duration-200 pointer-events-none flex items-end p-3"></div>
       </div>
       <div class="flex items-center gap-2 mt-2.5">
         <img src="https://i.pravatar.cc/28?img=12" alt="" class="w-7 h-7 rounded-full object-cover shrink-0">
         <span class="text-sm font-medium text-gray-800 truncate">Orman Clark</span>
-        <span class="badge-pro">PRO</span>
+        <span class="text-[10px] font-bold bg-badge-pro-bg text-badge-pro-txt rounded px-1.5 py-px">PRO</span>
         <div class="flex items-center gap-3 ml-auto shrink-0">
-          <span class="stat"><i class="bi bi-heart"></i> 98</span>
-          <span class="stat"><i class="bi bi-eye"></i> 24.2k</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="heart" class="w-3 h-3"></i> 98</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="eye"   class="w-3 h-3"></i> 24.2k</span>
         </div>
       </div>
     </div>
 
     <!-- Card 3 · Jordon Cheung — off-white, gray outline icons 5×4 -->
     <div>
-      <div class="shot-thumb">
-        <div class="thumb-inner canvas-offwhite">
-          <div class="icon-grid icon-grid-5col w-full h-full">
-            <i class="bi bi-diagram-3 icon-gray"></i>
-            <i class="bi bi-grid-1x2 icon-gray"></i>
-            <i class="bi bi-bezier2 icon-gray"></i>
-            <i class="bi bi-calendar4 icon-gray"></i>
-            <i class="bi bi-gear-wide icon-gray"></i>
-
-            <i class="bi bi-cloud-download icon-gray"></i>
-            <i class="bi bi-file-earmark-bar-graph icon-gray"></i>
-            <i class="bi bi-eyedropper icon-gray"></i>
-            <i class="bi bi-lock icon-gray"></i>
-            <i class="bi bi-pin-map icon-gray"></i>
-
-            <i class="bi bi-floppy icon-gray"></i>
-            <i class="bi bi-sliders2 icon-gray"></i>
-            <i class="bi bi-shield-half icon-gray"></i>
-            <i class="bi bi-chat-dots icon-gray"></i>
-            <i class="bi bi-card-image icon-gray"></i>
-
-            <i class="bi bi-diagram-2 icon-gray"></i>
-            <i class="bi bi-briefcase icon-gray"></i>
-            <i class="bi bi-graph-up icon-gray"></i>
-            <i class="bi bi-arrow-left-right icon-gray"></i>
-            <i class="bi bi-bar-chart-steps icon-gray"></i>
+      <div class="shot-thumb rounded-xl overflow-hidden relative cursor-pointer">
+        <div class="thumb-inner rounded-xl transition-transform duration-300 ease-in-out w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-canvas-offwhite border border-[#e0e0e0]">
+          <div class="grid grid-cols-5 gap-2.5 p-[22px] w-full h-full place-items-center">
+            <i data-lucide="git-fork"        class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="layout-grid"     class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="bezier-curve"    class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="calendar-days"   class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="settings-2"      class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="cloud-download"  class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="file-bar-chart"  class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="pipette"         class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="lock"            class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="map-pin"         class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="save"            class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="sliders"         class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="shield-half"     class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="message-square"  class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="image"           class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="network"         class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="briefcase"       class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="trending-up"     class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="arrow-left-right" class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
+            <i data-lucide="bar-chart-4"     class="w-[22px] h-[22px] text-icon-gray opacity-75"></i>
           </div>
         </div>
-        <div class="shot-overlay"></div>
+        <div class="shot-overlay absolute inset-0 rounded-xl bg-transparent transition-all duration-200 pointer-events-none flex items-end p-3"></div>
       </div>
       <div class="flex items-center gap-2 mt-2.5">
         <img src="https://i.pravatar.cc/28?img=47" alt="" class="w-7 h-7 rounded-full object-cover shrink-0">
         <span class="text-sm font-medium text-gray-800 truncate">Jordon Cheung</span>
         <div class="flex items-center gap-3 ml-auto shrink-0">
-          <span class="stat"><i class="bi bi-heart"></i> 176</span>
-          <span class="stat"><i class="bi bi-eye"></i> 57.1k</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="heart" class="w-3 h-3"></i> 176</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="eye"   class="w-3 h-3"></i> 57.1k</span>
         </div>
       </div>
     </div>
 
-    <!-- ══ ROW 2 ══ -->
+    <!-- ────────────── ROW 2 ────────────── -->
 
-    <!-- Card 4 · Aldo Crusher — beige, purple 3D-style icons 3×3 -->
+    <!-- Card 4 · Aldo Crusher — beige, purple filled icons 3×3 -->
     <div>
-      <div class="shot-thumb">
-        <div class="thumb-inner canvas-beige">
-          <div class="icon-grid icon-grid-3x3 w-full h-full">
-            <i class="bi bi-camera-fill icon-purple"></i>
-            <i class="bi bi-person-fill icon-purple"></i>
-            <i class="bi bi-box-fill icon-purple"></i>
-            <i class="bi bi-key-fill icon-purple"></i>
-            <i class="bi bi-stars icon-purple"></i>
-            <i class="bi bi-heart-fill icon-purple"></i>
-            <i class="bi bi-moon-stars-fill icon-purple"></i>
-            <i class="bi bi-gem icon-purple"></i>
-            <i class="bi bi-eye-fill icon-purple"></i>
+      <div class="shot-thumb rounded-xl overflow-hidden relative cursor-pointer">
+        <div class="thumb-inner rounded-xl transition-transform duration-300 ease-in-out w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-canvas-beige">
+          <div class="grid grid-cols-3 gap-[18px] p-[30px] w-full h-full place-items-center">
+            <i data-lucide="camera"      class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="user"        class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="box"         class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="key-round"   class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="sparkles"    class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="heart"       class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="moon"        class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="gem"         class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
+            <i data-lucide="eye"         class="w-8 h-8 text-icon-purple fill-icon-purple" style="fill:#4f46e5"></i>
           </div>
         </div>
-        <div class="shot-overlay"></div>
+        <div class="shot-overlay absolute inset-0 rounded-xl bg-transparent transition-all duration-200 pointer-events-none flex items-end p-3"></div>
       </div>
       <div class="flex items-center gap-2 mt-2.5">
         <img src="https://i.pravatar.cc/28?img=32" alt="" class="w-7 h-7 rounded-full object-cover shrink-0">
         <span class="text-sm font-medium text-gray-800 truncate">Aldo Crusher</span>
-        <span class="badge-pro">PRO</span>
+        <span class="text-[10px] font-bold bg-badge-pro-bg text-badge-pro-txt rounded px-1.5 py-px">PRO</span>
         <div class="flex items-center gap-3 ml-auto shrink-0">
-          <span class="stat"><i class="bi bi-heart"></i> 65</span>
-          <span class="stat"><i class="bi bi-eye"></i> 6.7k</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="heart" class="w-3 h-3"></i> 65</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="eye"   class="w-3 h-3"></i> 6.7k</span>
         </div>
       </div>
     </div>
 
     <!-- Card 5 · Canto — orange ad card -->
     <div>
-      <div class="shot-thumb">
-        <div class="thumb-inner canvas-orange"></div>
-        <!-- always-visible external link button -->
-        <div class="overlay-actions-always">
-          <button class="overlay-btn"><i class="bi bi-box-arrow-up-right"></i></button>
+      <div class="shot-thumb rounded-xl overflow-hidden relative cursor-pointer">
+        <div class="thumb-inner rounded-xl transition-transform duration-300 ease-in-out w-full aspect-[4/3] bg-canvas-orange"></div>
+        <!-- Always-visible external link btn -->
+        <div class="absolute top-2.5 right-2.5 flex gap-1.5 opacity-100">
+          <button class="overlay-btn bg-white rounded-lg w-8 h-8 flex items-center justify-center text-gray-600 cursor-pointer shadow-sm transition-colors">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </button>
         </div>
       </div>
       <div class="flex items-center gap-2 mt-2.5">
-        <div class="author-avatar" style="background:#f0a500; border:1.5px solid #ddd;">
-          <i class="bi bi-c-circle-fill text-white" style="font-size:15px;"></i>
+        <div class="w-7 h-7 rounded-full bg-[#f0a500] border border-gray-300 flex items-center justify-center shrink-0">
+          <i data-lucide="copyright" class="w-4 h-4 text-white"></i>
         </div>
         <span class="text-sm font-medium text-gray-800">Canto</span>
         <div class="ml-auto shrink-0">
@@ -257,42 +299,57 @@
       </div>
     </div>
 
-    <!-- Card 6 · Ramy Wafaa — tan, green illustration figures + hover overlay -->
+    <!-- Card 6 · Ramy Wafaa — tan bg, green illustration figures, hover overlay -->
     <div>
-      <div class="shot-thumb">
-        <div class="thumb-inner canvas-tan">
-          <div class="illus-grid">
-            <div class="illus-figure">🧑‍🎨</div>
-            <div class="illus-figure">🤸</div>
-            <div class="illus-figure">👩‍💻</div>
-            <div class="illus-figure">🐱</div>
-            <div class="illus-figure">🌿</div>
-            <div class="illus-figure">🦋</div>
+      <div class="shot-thumb rounded-xl overflow-hidden relative cursor-pointer">
+        <div class="thumb-inner rounded-xl transition-transform duration-300 ease-in-out w-full aspect-[4/3] flex items-center justify-center overflow-hidden bg-canvas-tan">
+          <!-- Illustration grid -->
+          <div class="grid grid-cols-3 gap-2.5 p-5 w-full h-full place-items-center">
+            <div class="w-[70px] h-[70px] rounded-full bg-illus-green flex items-center justify-center text-3xl">🧑‍🎨</div>
+            <div class="w-[70px] h-[70px] rounded-full bg-illus-green flex items-center justify-center text-3xl">🤸</div>
+            <div class="w-[70px] h-[70px] rounded-full bg-illus-green flex items-center justify-center text-3xl">👩‍💻</div>
+            <div class="w-[70px] h-[70px] rounded-full bg-illus-green flex items-center justify-center text-3xl">🐱</div>
+            <div class="w-[70px] h-[70px] rounded-full bg-illus-green flex items-center justify-center text-3xl">🌿</div>
+            <div class="w-[70px] h-[70px] rounded-full bg-illus-green flex items-center justify-center text-3xl">🦋</div>
           </div>
         </div>
-        <!-- Hover: dark overlay + slide-up title -->
-        <div class="shot-overlay">
-          <span class="overlay-title">ilcons / mini illustr...</span>
+
+        <!-- Hover overlay with slide-up title -->
+        <div class="shot-overlay absolute inset-0 rounded-xl bg-transparent transition-all duration-200 pointer-events-none flex items-end p-3">
+          <span class="overlay-title text-white text-xs font-semibold bg-black/60 rounded-md px-2 py-1 opacity-0 translate-y-1 transition-all duration-200">
+            ilcons / mini illustr...
+          </span>
         </div>
-        <!-- Hover: bookmark + heart buttons -->
-        <div class="overlay-actions">
-          <button class="overlay-btn"><i class="bi bi-bookmark"></i></button>
-          <button class="overlay-btn"><i class="bi bi-heart"></i></button>
+
+        <!-- Hover action buttons -->
+        <div class="overlay-actions absolute top-2.5 right-2.5 flex gap-1.5 opacity-0 transition-opacity duration-200">
+          <button class="overlay-btn bg-white rounded-lg w-8 h-8 flex items-center justify-center text-gray-600 cursor-pointer shadow-sm transition-colors">
+            <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+          </button>
+          <button class="overlay-btn bg-white rounded-lg w-8 h-8 flex items-center justify-center text-gray-600 cursor-pointer shadow-sm transition-colors">
+            <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+          </button>
         </div>
       </div>
+
       <div class="flex items-center gap-2 mt-2.5">
         <img src="https://i.pravatar.cc/28?img=58" alt="" class="w-7 h-7 rounded-full object-cover shrink-0">
         <span class="text-sm font-medium text-gray-800 truncate">Ramy Wafaa</span>
-        <span class="badge-pro">PRO</span>
+        <span class="text-[10px] font-bold bg-badge-pro-bg text-badge-pro-txt rounded px-1.5 py-px">PRO</span>
         <div class="flex items-center gap-3 ml-auto shrink-0">
-          <span class="stat"><i class="bi bi-heart"></i> 513</span>
-          <span class="stat"><i class="bi bi-eye"></i> 143k</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="heart" class="w-3 h-3"></i> 513</span>
+          <span class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="eye"   class="w-3 h-3"></i> 143k</span>
         </div>
       </div>
     </div>
 
   </div><!-- /grid -->
 </div><!-- /container -->
+
+<script>
+  // Boot Lucide after DOM is ready
+  lucide.createIcons();
+</script>
 
 </body>
 </html>
